@@ -1,8 +1,31 @@
 const Swine = require('../models/swine');
+const async = require('async');
 
 exports.index = (req, res) => {
 
-	res.send('Not implemented: Site homepage');
+	//res.send('Not implemented: Site homepage');
+
+	async.parallel({
+
+		swine_count: function(callback) {
+
+			Swine.count(callback);
+		},
+
+		breed_count: function(callback) {
+
+			Swine.distinct('swine_breed').count(callback);
+		},
+
+		farm_count: function(callback) {
+
+			Swine.distinct('farm_name').count().exec(callback);
+		},
+
+	}, function(err, results) {
+
+		res.render('index', {title: 'Pedigree Visualizer', error: err, data: results});
+	});
 };
 
 exports.swine_list = (req, res) => {

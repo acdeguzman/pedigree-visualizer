@@ -1,5 +1,27 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  
+	div(class='row container-fluid')
+
+		if error
+			p Error getting content
+
+		else
+
+		div(class='col-4')
+			img(src='/images/swine.jpg' class='img-fluid rounded-circle' width='200' height='200')
+		
+			h4 Total Swines: !{data.swine_count}
+
+		div(class='col-4')
+			img(src='data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=' class='img-fluid rounded-circle' width='200' height='200')
+		
+			h4 Total breed count: !{data.breed_count}
+
+		div(class='col-4')
+			img(src='data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=' class='img-fluid rounded-circle' width='200' height='200')
+		
+			h4 Total farm count: !{data.farm_count}
+
+	hr
