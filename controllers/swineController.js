@@ -13,7 +13,7 @@ exports.index = (req, res) => {
 		},
 
 		breed_count: function(callback) {
-
+			console.log(Swine.distinct('swine_breed'));
 			Swine.distinct('swine_breed').count(callback);
 		},
 
@@ -72,4 +72,14 @@ exports.swine_update_get = (req, res) => {
 exports.swine_update_post = (req, res) => {
 
 	res.send('Not implemented: Swine update POST');
+};
+
+exports.farm_list = (req, res) => {
+
+	res.send('Not implemented: Farm List');
+};
+
+exports.breed_list = (req, res) => {
+
+	res.send('Not implemented: Breed List');
 };

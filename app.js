@@ -11,7 +11,7 @@ var catalog = require('./routes/catalog');
 
 var app = express();
 
-//Set up mongoose connection
+Set up mongoose connection
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb://pedigreedev:pedigree@ds231245.mlab.com:31245/pedigree-viewer';
 mongoose.connect(mongoDB, {
@@ -20,9 +20,26 @@ mongoose.connect(mongoDB, {
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+//Set up MySQL connection
+
+// var connection = require('express-myconnection');
+// var mysql = require('mysql');
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+// app.use(
+
+//   connection(mysql, {
+
+//       host: 'localhost',
+//       user: 'root',
+//       password: 'user',
+//       database: 'pedigree_viewer',
+//       debug: false
+//   }, 'request')
+// );
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

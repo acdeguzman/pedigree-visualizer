@@ -33,4 +33,10 @@ router.get('/swine/:id', swine_controller.swine_detail);
 //GET request for list of all Swine
 router.get('/swines', swine_controller.swine_list);
 
+//GET request for list of all Farms
+router.get('/farms', swine_controller.farm_list);
+
+//GET request for list of all Breed
+router.get('/breeds', swine_controller.breed_list);
+
 module.exports = router;
