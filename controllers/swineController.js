@@ -95,30 +95,39 @@ exports.farm_list = (req, res) => {
 
 	Swine.distinct('farm_name', function(err, farms, next) {
 
-		if(err) return next.err
+		if(err) return next.err;
 
 		const num_distinct_farms = farms.length;
 
-		let swine_per_farm = [];
+		// let swine_per_farm = [];
 
-		for(let i = 0; i < num_distinct_farms; i++) {
+		// for(let i = 0; i < num_distinct_farms; i++) {
 
-			Swine.find({farm_name: farms[i]}).count(function(err, num, next	) {
+		// 	Swine.find({farm_name: farms[i]}).count(function(err, num, next	) {
 
-				if(err) return next.err
+		// 		if(err) return next.err
 
-				swine_per_farm.push(num);
-			})
-		}
+		// 		swine_per_farm.push(num);
+		// 	})
+		// }
 
-		console.log(swine_per_farm);
+		// console.log(swine_per_farm);
 
-		res.render('swine_farms', {title: 'Swine Farms', data: farms, num_farms: num_distinct_farms, spf: swine_per_farm});
+		res.render('swine_farms', {title: 'Swine Farms', data: farms, num_farms: num_distinct_farms});
 	});
 ;
 };
 
 exports.breed_list = (req, res) => {
 
-	res.send('Not implemented: Breed List');
+	// res.send('Not implemented: Breed List');
+
+	Swine.distinct('swine_breed', function(err, breeds, next) {
+
+		if(err) return next.err;
+
+		const num_distinct_breeds = breeds.length;
+
+		res.render('swine_breeds', {title: 'Swine Breeds', data: breeds, num_breeds: num_distinct_breeds});
+	});
 };

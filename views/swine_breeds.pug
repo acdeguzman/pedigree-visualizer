@@ -1,0 +1,12 @@
+extends layout
+
+block content
+	div(class='alert alert-success' role='alert') There are !{num_breeds} distinct swine breeds currently in the database!
+	table(class='table table-striped')
+		thead(class='thead-dark')
+			tr
+				th Swine Breed
+		tbody
+		each breed in data
+			tr
+				td !{breed}
