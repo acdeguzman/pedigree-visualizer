@@ -4,7 +4,7 @@ var Schema = mongoose.Schema;
 var SwineSchema = Schema({
 
 	registration_number: {type: Number, required: true},
-	farm_name: {type: String, required: true, max: 100},
+	farm_name	: {type: String, required: true, max: 100},
 	swine_breed: {type: String, required: true, max: 50},
 	swine_sex: {type: String, required: true, max: 10},
 	birthyear: {type: Number, required: true},

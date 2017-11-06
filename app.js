@@ -11,7 +11,7 @@ var catalog = require('./routes/catalog');
 
 var app = express();
 
-Set up mongoose connection
+//Set up mongoose connection
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb://pedigreedev:pedigree@ds231245.mlab.com:31245/pedigree-viewer';
 mongoose.connect(mongoDB, {

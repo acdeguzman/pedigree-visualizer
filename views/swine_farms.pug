@@ -1,0 +1,14 @@
+extends layout
+
+block content
+	div(class='alert alert-success' role='alert') There are !{num_farms} distinct swine farms currently in the database!
+	table(class='table table-striped')
+		thead(class='thead-dark')
+			tr
+				th Farm Name
+				th Number of Swines
+		tbody
+		each farm in data
+			tr
+				td !{farm}
+				td !{num}
