@@ -1,7 +1,8 @@
 extends layout
 
 block content
-	div(class='alert alert-success' role='alert') There are !{number} swines currently in the database!
+	div(class='alert alert-success' role='alert') There are !{number} swines currently in the database! 
+		a(href='/catalog/swine/create' class='alert-link') Add Swine
 	table(class='table table-striped')
 		thead(class='thead-dark')
 			tr

@@ -1,0 +1,132 @@
+extends layout
+
+block content
+
+	h2=title
+
+	div(class='container-fluid')
+		form(method='POST' action='')
+			div(class='form-group row')
+				label(for='registration_number' class='col-form-label col-md-5') Registration Number
+				div(class='col-md-4')
+					input(id='registration_number' class='form-control' type='text' placeholder='' name='registration_number' required='true' value=(undefined===swine ? '' : swine.registration_number))
+			div(class='form-group row')
+				label(for='farm_name' class='col-form-label col-md-5') Farm Name
+				div(class='col-md-4')
+					input(id='farm_name' class='form-control' type='text' placeholder='' name='farm_name' required='true' value=(undefined===swine ? '' : swine.farm_name))
+			div(class='form-group row')
+				label(for='swine_breed' class='col-form-label col-md-5') Swine Breed
+				div(class='col-md-4')
+					input(id='swine_breed' class='form-control' type='text' placeholder='Yorkshire, Duroc, Berkshire, etc' name='swine_breed' required='true' value=(undefined===swine ? '' : swine.swine_breed))
+			div(class='form-group row')
+				label(for='swine_sex' class='col-form-label col-md-5') Swine Sex
+				div(class='col-md-4')
+					input(id='swine_sex' class='form-control' type='text' placeholder='M or F' name='swine_sex' required='true' value=(undefined===swine ? '' : swine.swine_sex))
+			div(class='form-group row')
+				label(for='birthyear' class='col-form-label col-md-5') Birthyear
+				div(class='col-md-4')
+					input(id='birthyear' class='form-control' type='text' placeholder='ex. 1995' name='birthyear' required='true' value=(undefined===swine ? '' : swine.birthyear))
+			div(class='form-group row')
+				label(for='weight_at_data_collection' class='col-form-label col-md-5') Weight at Data Collection
+				div(class='col-md-4 input-group')
+					input(id='weight_at_data_collection' class='form-control' type='text' placeholder='' name='weight_at_data_collection' required='true' value=(undefined===swine ? '' : swine.weight_at_data_collection))
+					span(class='input-group-addon') kg.
+			div(class='form-group row')
+				label(for='age_at_data_collection' class='col-form-label col-md-5') Age at Data Collection
+				div(class='col-md-4 input-group')
+					input(id='age_at_data_collection' class='form-control' type='text' placeholder='' name='age_at_data_collection' required='true' value=(undefined===swine ? '' : swine.age_at_data_collection))
+					span(class='input-group-addon') yo.
+			div(class='form-group row')
+				label(for='date_registered' class='col-form-label col-md-5') Date Registered
+				div(class='col-md-4')
+					input(id='date_registered' class='form-control' type='date' placeholder='mm/dd/yyyy' name='date_registered' required='true' value=(undefined===swine ? '' : swine.date_registered))
+			div(class='form-group row')
+				label(for='farm_name' class='col-form-label col-md-5') Registered By
+				div(class='col-md-4')
+					input(id='registered_by' class='form-control' type='text' placeholder='' name='registered_by' required='true' value=(undefined===swine ? '' : swine.registered_by))
+			div(class='form-group row')
+				label(for='standardized_ave_daily_gain' class='col-form-label col-md-5') Standardized Average Daily Gain
+				div(class='col-md-4 input-group')
+					input(id='standardized_ave_daily_gain' class='form-control' type='text' placeholder='' name='standardized_ave_daily_gain' required='true' value=(undefined===swine ? '' : swine.standardized_ave_daily_gain))
+					span(class='input-group-addon') g/day
+			div(class='form-group row')
+				label(for='actual_ave_daily_gain' class='col-form-label col-md-5') Actual Average Daily Gain
+				div(class='col-md-4 input-group')
+					input(id='actual_ave_daily_gain' class='form-control' type='text' placeholder='' name='actual_ave_daily_gain' required='true' value=(undefined===swine ? '' : swine.actual_ave_daily_gain))
+					span(class='input-group-addon') g/day
+			div(class='form-group row')
+				label(for='standardized_backfat_thickness' class='col-form-label col-md-5') Standardized Backfat Thickness
+				div(class='col-md-4 input-group')
+					input(id='standardized_backfat_thickness' class='form-control' type='text' placeholder='' name='standardized_backfat_thickness' required='true' value=(undefined===swine ? '' : swine.standardized_backfat_thickness))
+					span(class='input-group-addon') mm
+			div(class='form-group row')
+				label(for='actual_backfat_thickness' class='col-form-label col-md-5') Actual Backfat Thickness
+				div(class='col-md-4 input-group')
+					input(id='actual_backfat_thickness' class='form-control' type='text' placeholder='' name='actual_backfat_thickness' required='true' value=(undefined===swine ? '' : swine.actual_backfat_thickness))
+					span(class='input-group-addon') mm
+			div(class='form-group row')
+				label(for='standardized_feed_efficiency' class='col-form-label col-md-5') Standardized Feed Efficiency
+				div(class='col-md-4 input-group')
+					input(id='standardized_feed_efficiency' class='form-control' type='text' placeholder='' name='standardized_feed_efficiency' required='true' value=(undefined===swine ? '' : swine.standardized_feed_efficiency))
+					span(class='input-group-addon') gain/feed
+			div(class='form-group row')
+				label(for='actual_feed_efficiency' class='col-form-label col-md-5') Actual Feed Efficiency
+				div(class='col-md-4 input-group')
+					input(id='actual_feed_efficiency' class='form-control' type='text' placeholder='' name='actual_feed_efficiency' required='true' value=(undefined===swine ? '' : swine.actual_feed_efficiency))
+					span(class='input-group-addon') gain/feed
+			div(class='form-group row')
+				label(for='birth_weight' class='col-form-label col-md-5') Birth Weight
+				div(class='col-md-4 input-group')
+					input(id='birth_weight' class='form-control' type='text' placeholder='' name='birth_weight' required='true' value=(undefined===swine ? '' : swine.birth_weight))
+					span(class='input-group-addon') kg
+			div(class='form-group row')
+				label(for='total_when_born_male' class='col-form-label col-md-5') Total When Born (Male)
+				div(class='col-md-4')
+					input(id='total_when_born_male' class='form-control' type='text' placeholder='' name='total_when_born_male' required='true' value=(undefined===swine ? '' : swine.total_when_born_male))
+			div(class='form-group row')
+				label(for='total_when_born_female' class='col-form-label col-md-5') Total When Born (Female)
+				div(class='col-md-4')
+					input(id='total_when_born_female' class='form-control' type='text' placeholder='' name='total_when_born_female' required='true' value=(undefined===swine ? '' : swine.total_when_born_female))
+			div(class='form-group row')
+				label(for='standardized_total_when_born' class='col-form-label col-md-5') Standardized Total When Born
+				div(class='col-md-4')
+					input(id='standardized_total_when_born' class='form-control' type='text' placeholder='' name='standardized_total_when_born' required='true' value=(undefined===swine ? '' : swine.standardized_total_when_born))
+			div(class='form-group row')
+				label(for='actual_littersize_born_alive' class='col-form-label col-md-5') Actual Littersize Born Alive
+				div(class='col-md-4')
+					input(id='actual_littersize_born_alive' class='form-control' type='text' placeholder='' name='actual_littersize_born_alive' required='true' value=(undefined===swine ? '' : swine.actual_littersize_born_alive))
+			div(class='form-group row')
+				label(for='standardized_littersize_born_alive' class='col-form-label col-md-5') Standardized Littersize Born Alive
+				div(class='col-md-4')
+					input(id='standardized_littersize_born_alive' class='form-control' type='text' placeholder='' name='standardized_littersize_born_alive' required='true' value=(undefined===swine ? '' : swine.standardized_littersize_born_alive))
+			div(class='form-group row')
+				label(for='parity' class='col-form-label col-md-5') Parity
+				div(class='col-md-4')
+					input(id='parity' class='form-control' type='text' placeholder='' name='parity' required='true' value=(undefined===swine ? '' : swine.parity))
+			div(class='form-group row')
+				label(for='standardized_littersize_at_weaning' class='col-form-label col-md-5') Standardized Littersize At Weaning
+				div(class='col-md-4')
+					input(id='standardized_littersize_at_weaning' class='form-control' type='text' placeholder='' name='standardized_littersize_at_weaning' required='true' value=(undefined===swine ? '' : swine.standardized_littersize_at_weaning))
+			div(class='form-group row')
+				label(for='actual_littersize_at_weaning' class='col-form-label col-md-5') Actual Littersize At Weaning
+				div(class='col-md-4')
+					input(id='actual_littersize_at_weaning' class='form-control' type='text' placeholder='' name='actual_littersize_at_weaning' required='true' value=(undefined===swine ? '' : swine.actual_littersize_at_weaning))
+			div(class='form-group row')
+				label(for='litterweight_at_weaning' class='col-form-label col-md-5') Litterweight At Weaning
+				div(class='col-md-4')
+					input(id='litterweight_at_weaning' class='form-control' type='text' placeholder='' name='litterweight_at_weaning' required='true' value=(undefined===swine ? '' : swine.litterweight_at_weaning))
+			div(class='form-group row')
+				label(for='maternal' class='col-form-label col-md-5') Maternal Registration Number
+				div(class='col-md-4')
+					input(id='maternal' class='form-control' type='text' placeholder='' name='maternal' required='true' value=(undefined===swine ? '' : swine.maternal))
+			div(class='form-group row')
+				label(for='paternal' class='col-form-label col-md-5') Paternal Registration Number
+				div(class='col-md-4')
+					input(id='paternal' class='form-control' type='text' placeholder='' name='paternal' required='true' value=(undefined===swine ? '' : swine.paternal))
+			hr
+			button(class='btn btn-success' type='submit' id='add_swine') Add Swine
+
+		if errors
+			ul
+				for error in errors
+					li!= error.msg
