@@ -35,7 +35,7 @@ var SwineSchema = Schema({
 SwineSchema
 	.virtual('url')
 	.get(function() {
-		return '/swine/' + this._id;
+		return '/catalog/swine/' + this._id;
 	});
 
 module.exports = mongoose.model('Swine', SwineSchema);

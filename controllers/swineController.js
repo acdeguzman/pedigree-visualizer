@@ -26,9 +26,19 @@ exports.swine_list = (req, res) => {
 	// res.send('Not implemented: Swine List');
 };
 
-exports.swine_detail = (req, res) => {
+exports.swine_detail = (req, res, next) => {
 
-	res.send('Not implemented: Swine Detail');
+	//res.send('Not implemented: Swine Detail');
+
+	Swine.findById(req.params.id).exec(function(err, swine_detail, next) {
+
+		if(err) return next.err;
+
+		else {
+
+			res.render('swine_detail', {title: 'Swine Detail', data: swine_detail});
+		}
+	});
 };
 
 //Display Swine create form on GET
@@ -75,8 +85,6 @@ exports.swine_create_post = (req, res) => {
 	req.checkBody('litterweight_at_weaning', 'Invalid format for Litterweight at weaning').notEmpty().isInt();
 	req.checkBody('maternal', 'Invalid format for Maternal registration number').notEmpty().isInt();
 	req.checkBody('paternal', 'Invalid format for Paternal registration number').notEmpty().isInt();
-
-	console.log('fak');
 
 	req.sanitize('registration_number').escape();req.sanitize('registration_number').trim();
 	req.sanitize('farm_name').escape();req.sanitize('farm_name').trim();
@@ -151,6 +159,7 @@ exports.swine_create_post = (req, res) => {
 		if(err) return next.err;
 
 		if(swine_found) res.redirect(swine_found.url);
+
 		else {
 
 			swine.save(function(err) {
