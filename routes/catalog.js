@@ -31,12 +31,17 @@ router.post('/swine/:id/update', swine_controller.swine_update_post);
 router.get('/swine/:id', swine_controller.swine_detail);
 
 //GET request for list of all Swine
-router.get('/swines', swine_controller.swine_list);
+router.get('/swines', swine_controller.swine_list_get);
+
+//POST request for list of all Swine
+router.post('/swines', swine_controller.swine_list_post);
 
 //GET request for list of all Farms
 router.get('/farms', swine_controller.farm_list);
 
 //GET request for list of all Breed
 router.get('/breeds', swine_controller.breed_list);
+
+router.get('/visualize', swine_controller.visualize_get);
 
 module.exports = router;

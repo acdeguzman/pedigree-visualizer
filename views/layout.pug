@@ -6,6 +6,9 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/Treant.css')
+    link(rel='stylesheet', href='/stylesheets/perfect-scrollbar.css')
+    link(rel='stylesheet', href='/stylesheets/custom-color-plus-scrollbar.css')
     link(rel='icon' href='/images/icon.png')
 
   body
@@ -22,8 +25,7 @@ html(lang='en')
               a(class='nav-link' href='/catalog/breeds') Swine Breeds
             li(class='nav-item')
               a(class='nav-link' href='/catalog/farms') Swine Farms
-
-          button(class='btn btn-outline-primary my-2 my-sm-0' type='submit') Visualize
+          a(class='nav-link btn btn-outline-info' href='/catalog/visualize') Visualize
 
     div(class='container' id='main')
       div(class='row')

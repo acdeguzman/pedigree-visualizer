@@ -6,7 +6,7 @@ exports.index = (req, res) => {
 	res.render('index', {title: 'Pedigree Visualizer'});
 };
 
-exports.swine_list = (req, res) => {
+exports.swine_list_get = (req, res) => {
 
 	Swine.find().exec(function(err, list_swines, next) {
 
@@ -22,9 +22,42 @@ exports.swine_list = (req, res) => {
 			});
 		};
 	});
-
-	// res.send('Not implemented: Swine List');
 };
+
+exports.swine_list_post = (req, res) => {
+
+	//res.end();
+	req.checkBody('regNum', 'Invalid format').notEmpty().isInt()
+
+	req.sanitize('regNum').escape();req.sanitize('regNum').trim();
+
+	const errors = req.validationErrors();
+
+	if(!errors) {
+
+		Swine.findOne({'registration_number': req.body.regNum}).exec(function(err, swine_found) {
+
+			if(err) {
+				console.log('fak');
+				res.render('not_found', {title: 'Swine not Found', regNum: req.body.registration_number});
+				return;
+			}
+
+			if(swine_found) {
+				console.log('wat');
+
+				res.redirect(swine_found.url);
+			}
+
+			else {
+
+				console.log('err');
+				res.render('not_found', {title: 'Swine not Found', regNum: req.body.regNum});
+				return;
+			}
+		});
+	}
+}
 
 exports.swine_detail = (req, res, next) => {
 
@@ -44,8 +77,6 @@ exports.swine_detail = (req, res, next) => {
 //Display Swine create form on GET
 exports.swine_create_get = (req, res) => {
 
-	// res.send('Not implemented: Swine create GET');
-
 	res.render('swine_form', {title: 'Add Swine'});
 };
 
@@ -54,13 +85,10 @@ exports.swine_create_post = (req, res) => {
 
 	//res.send('Not implemented: Swine create POST');
 
-	console.log(req.body.date_registered);	
-
 	req.checkBody('registration_number', 'Registration number is required').notEmpty().isInt();
 	req.checkBody('registration_number', 'Input should be in numerical format').isInt();
 	req.checkBody('farm_name', 'Farm name is required!').notEmpty();
 	req.checkBody('swine_breed', 'Swine breed is required!').notEmpty();
-	req.checkBody('swine_breed', 'Invalid swine breed format').isAlpha();
 	req.checkBody('swine_sex', 'Invalid swine sex').notEmpty().isAlpha().isIn(['M', 'F']);
 	req.checkBody('birthyear', 'Invalid birthyear').notEmpty().isInt().isLength(4);
 	req.checkBody('weight_at_data_collection', 'Invalid weight').notEmpty().isInt();
@@ -158,7 +186,10 @@ exports.swine_create_post = (req, res) => {
 
 		if(err) return next.err;
 
-		if(swine_found) res.redirect(swine_found.url);
+		if(swine_found) {
+
+			res.render('swine_form', {title: 'Add Swine', swine: swine, errors: [{msg:'Registration Number already exists!'}]});
+		}
 
 		else {
 
@@ -204,28 +235,27 @@ exports.farm_list = (req, res) => {
 
 		const num_distinct_farms = farms.length;
 
-		// let swine_per_farm = [];
+		let swine_per_farm = [];
 
-		// for(let i = 0; i < num_distinct_farms; i++) {
+		for(let i = 0; i < num_distinct_farms; i++) {
 
-		// 	Swine.find({farm_name: farms[i]}).count(function(err, num, next	) {
+			Swine.find({farm_name: farms[i]}).count().exec(function(err, num, next) {
 
-		// 		if(err) return next.err
+				if(err) return next.err
 
-		// 		swine_per_farm.push(num);
-		// 	})
-		// }
+				console.log(num);
 
-		// console.log(swine_per_farm);
+				swine_per_farm.push(num);
+			});
+		}
+		
+		console.log(swine_per_farm);
 
 		res.render('swine_farms', {title: 'Swine Farms', data: farms, num_farms: num_distinct_farms});
 	});
-;
 };
 
 exports.breed_list = (req, res) => {
-
-	// res.send('Not implemented: Breed List');
 
 	Swine.distinct('swine_breed', function(err, breeds, next) {
 
@@ -235,4 +265,10 @@ exports.breed_list = (req, res) => {
 
 		res.render('swine_breeds', {title: 'Swine Breeds', data: breeds, num_breeds: num_distinct_breeds});
 	});
+};
+
+exports.visualize_get = (req, res) => {
+
+	// res.render('visualize', {title: 'Visualize Swine'});
+
 };

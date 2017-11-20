@@ -14,7 +14,7 @@ var app = express();
 
 //Set up mongoose connection
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://pedigreedev:pedigree@ds231245.mlab.com:31245/pedigree-viewer';
+var mongoDB = 'mongodb://localhost/swines';
 mongoose.connect(mongoDB, {
   useMongoClient: true
 });
