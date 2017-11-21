@@ -270,5 +270,26 @@ exports.breed_list = (req, res) => {
 exports.visualize_get = (req, res) => {
 
 	// res.render('visualize', {title: 'Visualize Swine'});
+	res.render('visualize', {title: 'Visualize'});
+};
 
+exports.visualize_post = (req, res) => {
+
+	req.checkBody('enterRegNum', 'Registration number is required').notEmpty().isInt();
+	req.checkBody('numGen', 'Number of generations is required').notEmpty().isInt();
+
+	req.sanitize('enterRegNum').escape();req.sanitize('enterRegNum').trim();
+	req.sanitize('numGen').escape();req.sanitize('numGen').trim();
+
+	const errors = req.validationErrors();
+
+	if(errors) {
+
+		res.render('visualize', {title: 'Visualize', errors: errors});
+		return;
+	}
+
+	if(parseInt(req.body.numGen)<0) res.render('visualize', {title: 'Visualize', errors: [{msg: 'Invalid number of generations'}]});
+	
+	res.render('visualized', {title: 'Visualized', regnum: req.body.enterRegNum, numgen: req.body.numGen});
 };

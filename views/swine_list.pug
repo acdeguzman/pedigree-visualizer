@@ -2,13 +2,13 @@ extends layout
 
 block content
 	div(class='row')
-		div(class='alert alert-success col-md-8 float-left' role='alert') There are !{number} swines currently in the database! 
+		div(class='alert alert-success col-md-7 float-left' role='alert') There are !{number} swines currently in the database! 
 			a(href='/catalog/swine/create' class='alert-link') Add Swine
 
-		form(class='form-inline col-md-4' method='POST' action='')
+		form(class='form-inline col-md-5' method='POST' action='')
 			div(class='form-group')
-				input(type='text' class='form-control' id='regNum' name='regNum' placeholder='Enter Registration Number' value=(undefined===swine ? '' : swine.registration_number))
-				button(type='submit' class='btn btn-outline-primary') Search
+				input(type='text' class='form-control form-control-lg' id='regNum' name='regNum' placeholder='Enter Registration Number' value=(undefined===swine ? '' : swine.registration_number))
+				button(type='submit' class='btn btn-primary btn-lg' id='searchOnebtn') Search
 
 	table(class='table table-striped')
 		thead(class='thead-dark')

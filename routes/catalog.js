@@ -42,6 +42,10 @@ router.get('/farms', swine_controller.farm_list);
 //GET request for list of all Breed
 router.get('/breeds', swine_controller.breed_list);
 
+//GET request for getting input registration number and number of generations
 router.get('/visualize', swine_controller.visualize_get);
+
+//POST request for displaying tree and data
+router.post('/visualize', swine_controller.visualize_post);
 
 module.exports = router;

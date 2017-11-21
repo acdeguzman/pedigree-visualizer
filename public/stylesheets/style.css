@@ -26,3 +26,14 @@ label {
 #div2 {
 	background-color: blue;
 }
+
+.col-centered {
+	float: none;
+	margin: 0 auto;
+}
+
+#regNum, #searchOnebtn {
+
+	margin-top: -18px;
+	margin-left: 5px;
+}

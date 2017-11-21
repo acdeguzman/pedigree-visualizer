@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+	div(class='jumbotron jumbotron-fluid col-md-4 col-centered')
+		div(class='container')
+			form(method='POST' action='')
+				div(class='form-group')
+					label(for='enterRegNum') Registration Number
+					input(type='text' class='form-control form-control-lg' id='enterRegNum' name='enterRegNum' placeholder='Enter Registration Number' value=(undefined===swine ? '' : swine.registration_number))
+				div(class='form-group')
+					label(for='numGen') Number of Generations
+					input(type='text' class='form-control form-control-lg' id='numGen' name='numGen' placeholder='Enter Number of Generations')
+				button(type='submit' class='btn btn-lg btn-primary') Proceed
+			if errors
+				ul
+					for error in errors
+						li!= error.msg
