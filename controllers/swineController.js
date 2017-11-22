@@ -291,5 +291,45 @@ exports.visualize_post = (req, res) => {
 
 	if(parseInt(req.body.numGen)<0) res.render('visualize', {title: 'Visualize', errors: [{msg: 'Invalid number of generations'}]});
 	
+	// Swine.find({'registration_number':req.body.enterRegNum}, 'maternal paternal', function(err, baboy) {
+
+	// 	console.log(baboy);
+		
+	// 	Swine.find({'registration_number':baboy[0].maternal}, 'maternal paternal', function(err, baboy2) {
+
+	// 		console.log(baboy.concat(baboy2));
+	// 	});
+
+	// 	res.render('visualized', {title: 'Visualized', regnum: req.body.enterRegNum, numgen: req.body.numGen, arrBaboy: baboy.paternal});
+	// });
+
+
+	console.log(req.body.enterRegNum);
+
+	let pigArr = [];
+
+	addToTree = (regnum, generation, callback) => {
+
+		Swine.findOne({'registration_number': regnum}, function(err, pig) {
+
+			if(err) return callback(err);
+
+			console.log(pig.registration_number);
+
+			if(generation != 0) {
+
+				addToTree(pig.maternal, generation--, callback);
+				//addToTree(pig.paternal, generation--, callback);
+			}
+
+			else callback();
+		});
+	}
+
+	addToTree(req.body.enterRegNum, parseInt(req.body.numGen), function(err) {
+
+		console.log(pigArr)
+	});
+
 	res.render('visualized', {title: 'Visualized', regnum: req.body.enterRegNum, numgen: req.body.numGen});
 };
