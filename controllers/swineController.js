@@ -38,13 +38,12 @@ exports.swine_list_post = (req, res) => {
 		Swine.findOne({'registration_number': req.body.regNum}).exec(function(err, swine_found) {
 
 			if(err) {
-				console.log('fak');
+				
 				res.render('not_found', {title: 'Swine not Found', regNum: req.body.registration_number});
 				return;
 			}
 
 			if(swine_found) {
-				console.log('wat');
 
 				res.redirect(swine_found.url);
 			}
@@ -307,6 +306,7 @@ exports.visualize_post = (req, res) => {
 	console.log(req.body.enterRegNum);
 
 	let pigArr = [];
+	const init_gen = parseInt(req.body.numGen);
 
 	addToTree = (regnum, generation, callback) => {
 
@@ -314,22 +314,20 @@ exports.visualize_post = (req, res) => {
 
 			if(err) return callback(err);
 
-			console.log(pig.registration_number);
+			pigArr.push(regnum);
+
+			if(pigArr.length == Math.pow(2, init_gen+1)-1) res.render('visualized', {title: 'Visualized', regnum: req.body.enterRegNum, numgen: req.body.numGen, pigArr: pigArr});
 
 			if(generation != 0) {
-
-				addToTree(pig.maternal, generation--, callback);
-				//addToTree(pig.paternal, generation--, callback);
+				generation--;
+				addToTree(pig.maternal, generation, callback);
+				addToTree(pig.paternal, generation, callback);
 			}
-
-			else callback();
 		});
 	}
 
-	addToTree(req.body.enterRegNum, parseInt(req.body.numGen), function(err) {
+	addToTree(parseInt(req.body.enterRegNum), parseInt(req.body.numGen), pigArr, function(err) {
 
-		console.log(pigArr)
+		console.log(pigArr);
 	});
-
-	res.render('visualized', {title: 'Visualized', regnum: req.body.enterRegNum, numgen: req.body.numGen});
 };
