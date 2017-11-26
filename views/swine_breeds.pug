@@ -1,7 +1,9 @@
 extends layout
 
 block content
-	div(class='alert alert-success' role='alert') There are !{num_breeds} distinct swine breeds currently in the database!
+	div(class='alert alert-success' role='alert') There are  
+		strong !{num_breeds} 
+		| distinct swine breeds currently in the database!
 	table(class='table table-striped')
 		thead(class='thead-dark')
 			tr

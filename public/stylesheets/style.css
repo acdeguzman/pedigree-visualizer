@@ -37,3 +37,36 @@ label {
 	margin-top: -18px;
 	margin-left: 5px;
 }
+
+.nav-pills > li.active > a {
+
+	color:black;
+}
+
+.nav-pills > li > a {
+
+	color:black;
+}
+
+#detailsTable {
+
+	margin-top: 10px;
+}
+
+.tree-diagram {
+    padding: 2px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    border: 1px solid #000;
+    width: 200px;
+    font-family: Tahoma;
+    font-size: 12px;
+}
+
+/* optional Container STYLES */
+.chart { height: 600px; margin: 5px; width: 900px; }
+.Treant > .node {  }
+.Treant > p { font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: bold; font-size: 12px; }
+.node-name { font-weight: bold;}

@@ -60,8 +60,6 @@ exports.swine_list_post = (req, res) => {
 
 exports.swine_detail = (req, res, next) => {
 
-	//res.send('Not implemented: Swine Detail');
-
 	Swine.findById(req.params.id).exec(function(err, swine_detail, next) {
 
 		if(err) return next.err;
@@ -247,8 +245,6 @@ exports.farm_list = (req, res) => {
 				swine_per_farm.push(num);
 			});
 		}
-		
-		console.log(swine_per_farm);
 
 		res.render('swine_farms', {title: 'Swine Farms', data: farms, num_farms: num_distinct_farms});
 	});
@@ -289,24 +285,11 @@ exports.visualize_post = (req, res) => {
 	}
 
 	if(parseInt(req.body.numGen)<0) res.render('visualize', {title: 'Visualize', errors: [{msg: 'Invalid number of generations'}]});
-	
-	// Swine.find({'registration_number':req.body.enterRegNum}, 'maternal paternal', function(err, baboy) {
-
-	// 	console.log(baboy);
-		
-	// 	Swine.find({'registration_number':baboy[0].maternal}, 'maternal paternal', function(err, baboy2) {
-
-	// 		console.log(baboy.concat(baboy2));
-	// 	});
-
-	// 	res.render('visualized', {title: 'Visualized', regnum: req.body.enterRegNum, numgen: req.body.numGen, arrBaboy: baboy.paternal});
-	// });
-
-
-	console.log(req.body.enterRegNum);
 
 	let pigArr = [];
+	let simple_chart_config = [];
 	const init_gen = parseInt(req.body.numGen);
+	let pow = 1;
 
 	addToTree = (regnum, generation, callback) => {
 
@@ -314,9 +297,57 @@ exports.visualize_post = (req, res) => {
 
 			if(err) return callback(err);
 
-			pigArr.push(regnum);
+			pigArr.push({
+				
+				pig: pig,
+				generation: generation
+			});
 
-			if(pigArr.length == Math.pow(2, init_gen+1)-1) res.render('visualized', {title: 'Visualized', regnum: req.body.enterRegNum, numgen: req.body.numGen, pigArr: pigArr});
+			if(pigArr.length == Math.pow(2, init_gen+1)-1) {
+
+				const config = {
+					container: '#tree-simple',
+				}
+
+				const rootSwine = {
+					text: {
+						name: (pigArr[0].pig.registration_number).toString()
+					}
+				}
+
+				simple_chart_config.push(config);
+				simple_chart_config.push(rootSwine);
+
+				let index = 1;
+
+				for(let i=1; i<Math.pow(2,init_gen); i++) { //index 1 yung rootnode, 0 yung config
+
+					for(let x=0; x<pigArr.length; x++) {
+
+						if(parseInt(simple_chart_config[i].text.name) === pigArr[x].pig.registration_number) { //find the pig object with the same regnum
+
+							simple_chart_config.push({
+								parent: simple_chart_config[i],
+								text: {
+									name: (pigArr[x].pig.maternal).toString()
+								}
+							});
+
+							simple_chart_config.push({
+								parent: simple_chart_config[i],
+								text: {
+									name: (pigArr[x].pig.paternal).toString()
+								}
+							});
+
+							break;
+						}
+					}
+				}
+
+				console.log(simple_chart_config);
+				res.render('visualized', {title: 'Visualized', regnum: req.body.enterRegNum, numgen: req.body.numGen, pigArr: pigArr, init_gen: init_gen, pigarray: JSON.stringify(pigArr)});
+			}
 
 			if(generation != 0) {
 				generation--;
@@ -326,8 +357,8 @@ exports.visualize_post = (req, res) => {
 		});
 	}
 
-	addToTree(parseInt(req.body.enterRegNum), parseInt(req.body.numGen), pigArr, function(err) {
+	addToTree(parseInt(req.body.enterRegNum), parseInt(req.body.numGen), function(err) {
 
-		console.log(pigArr);
+		console.log(pigArr); 
 	});
 };
